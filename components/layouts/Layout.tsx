@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { FC } from "react"
+import { Navbar } from '../ui/Navbar';
 
 //Componente encargado de crear el layout principal de la aplicacion, el cual sera 
 //mostrado en toda la aplicacion
@@ -22,9 +23,9 @@ export const Layout:FC<Props> = ({ children, title }) => {
         <meta name="keywords" content="XXXXX, pokemon, pokedex" />
       </Head>
 
-      {/* TODO: Navbar */}
+      <Navbar />
 
-      <main>
+      <main className="main-container">
         { children }
       </main>
     </>
