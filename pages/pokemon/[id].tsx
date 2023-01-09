@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Layout } from '../../components/layouts'
 import { GetStaticProps } from 'next';
 import { GetStaticPaths } from 'next'
@@ -14,8 +14,12 @@ interface Props {
 
 const PokemonPage:FC<Props> = ({pokemon}) => {
 
+  const [isInFavorites, setIsInFavorites] = useState(localFavorites.existInFavorites(pokemon.id))
+  
+
   const onToogleFavorites = () => {
     localFavorites.toggleFavorite(pokemon.id)
+    setIsInFavorites(!isInFavorites)
   }
 
   return (
@@ -40,11 +44,10 @@ const PokemonPage:FC<Props> = ({pokemon}) => {
               <Text h1 transform='capitalize'>{pokemon.name}</Text>
 
               <Button
-                color='gradient'
-                ghost
+                color={!isInFavorites ? 'gradient':'error'}
                 onPress={onToogleFavorites}
               >
-                Guardar en favoritos
+                { isInFavorites ? 'Borrar de favoritos' : 'Guardar en favoritos'}
               </Button>
             </Card.Header>
 
